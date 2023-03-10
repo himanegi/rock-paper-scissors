@@ -25,22 +25,28 @@ function playRound(playerSelection, computerSelection){
     else
         return "Wrong Input!";
 }
-const playerSelection=prompt("Enter your choice : ");
-const computerSelection=getComputerChoice();
-console.log(playRound(playerSelection,computerSelection));
 function game(){
+    let human=0;
+    let comp=0;
     for(let i=0;i<5;i++){
-        if(playRound().slice(4,5)=="W")
+        const playerSelection=prompt("Enter your choice : ");
+        const computerSelection=getComputerChoice();
+        const result=playRound(playerSelection, computerSelection);
+        console.log(result);
+        if(result.slice(4,5)=="W")
             human++;
-        else if(playRound.slice(4,5)=="L")
+        else if(result.slice(4,5)=="L")
             comp++;
-        else{
+        else if(result=="Draw!"){
             human++;
             comp++;
         }
     }
     if(human>comp) 
         return "Human Wins!";
-    else
+    else if(comp>human)
         return "Computer Wins!";
+    else    
+        return "Draw!";
 }
+console.log(game());
