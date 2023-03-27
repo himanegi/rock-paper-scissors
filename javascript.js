@@ -1,3 +1,11 @@
+let playerSelection;
+let computerSelection=getComputerChoice();
+let buttons=document.querySelectorAll('button');
+buttons.forEach(btn=>{
+    btn.addEventListener('click',()=>{
+        playerSelection=btn.name;
+    });
+});
 function getComputerChoice(){
     const val=Math.floor(Math.random()*3)+1;
     if(val==1)
@@ -25,28 +33,27 @@ function playRound(playerSelection, computerSelection){
     else
         return "Wrong Input!";
 }
-function game(){
-    let human=0;
-    let comp=0;
-    for(let i=0;i<5;i++){
-        const playerSelection=prompt("Enter your choice : ");
-        const computerSelection=getComputerChoice();
-        const result=playRound(playerSelection, computerSelection);
-        console.log(result);
-        if(result.slice(4,5)=="W")
-            human++;
-        else if(result.slice(4,5)=="L")
-            comp++;
-        else if(result=="Draw!"){
-            human++;
-            comp++;
-        }
-    }
-    if(human>comp) 
-        return "Human Wins!";
-    else if(comp>human)
-        return "Computer Wins!";
-    else    
-        return "Draw!";
-}
-console.log(game());
+// function game(){
+//     let human=0;
+//     let comp=0;
+//     for(let i=0;i<5;i++){
+//         computerSelection=getComputerChoice();
+//         const result=playRound(playerSelection, computerSelection);
+//         console.log(result);
+//         if(result.slice(4,5)=="W")
+//             human++;
+//         else if(result.slice(4,5)=="L")
+//             comp++;
+//         else if(result=="Draw!"){
+//             human++;
+//             comp++;
+//         }
+//     }
+//     if(human>comp) 
+//         return "Human Wins!";
+//     else if(comp>human)
+//         return "Computer Wins!";
+//     else    
+//         return "Draw!";
+// }
+// console.log(game());
