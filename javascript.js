@@ -1,10 +1,11 @@
 let playerSelection;
-let computerSelection=getComputerChoice();
+let computerSelection;
 let buttons=document.querySelectorAll('button');
 const div=document.createElement('div');
-
+div.textContent="HELLO";
 buttons.forEach(btn=>{
     btn.addEventListener('click',()=>{
+        computerSelection=getComputerChoice();
         playerSelection=btn.name;
         console.log(playRound(playerSelection, computerSelection));
     });
