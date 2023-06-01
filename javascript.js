@@ -5,7 +5,6 @@ const container= document.querySelector('#container');
 const div=document.createElement('div');
 let human=0;
 let comp=0;
-let cnt=0;
 let winner="";
 buttons.forEach(btn=>{
         btn.addEventListener('click',()=>{
@@ -13,17 +12,12 @@ buttons.forEach(btn=>{
             playerSelection=btn.name;
             const result=playRound(playerSelection, computerSelection);
             div.textContent=result;
+            container.appendChild(div);
             if(result.slice(4,5)=="W")
                 human++;
             else if(result.slice(4,5)=="L") 
                 comp++;
-            else if(result=="Draw!"){
-                human++;
-                comp++;
-            }
-            cnt++;
-            if(cnt==6) resetGame();
-            container.appendChild(div);
+            if(human==5||comp==5) resetGame();
         });
 });
 function resetGame(){
@@ -37,7 +31,6 @@ function resetGame(){
     container.appendChild(div);
     human=0;
     comp=0;
-    cnt=0;
     winner="";
 }
 function getComputerChoice(){
