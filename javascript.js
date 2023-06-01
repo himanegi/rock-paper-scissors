@@ -2,9 +2,13 @@ let playerSelection;
 let computerSelection;
 let buttons=document.querySelectorAll('button');
 const container= document.querySelector('#container');
+const hscore=document.querySelector('#hscore');
+const cscore=document.querySelector('#cscore');
 const div=document.createElement('div');
 let human=0;
 let comp=0;
+hscore.textContent="Human:"+human;
+cscore.textContent="Comp:"+comp;
 let winner="";
 buttons.forEach(btn=>{
         btn.addEventListener('click',()=>{
@@ -13,24 +17,34 @@ buttons.forEach(btn=>{
             const result=playRound(playerSelection, computerSelection);
             div.textContent=result;
             container.appendChild(div);
-            if(result.slice(4,5)=="W")
+            if(result.slice(4,5)=="W"){
                 human++;
-            else if(result.slice(4,5)=="L") 
+                hscore.textContent="Human:"+human;
+            }
+            else if(result.slice(4,5)=="L") {
                 comp++;
+                cscore.textContent="Comp:"+comp;
+            }
+            else{
+                hscore.textContent="Human:"+human;
+                cscore.textContent="Comp:"+comp;
+            }
             if(human==5||comp==5) resetGame();
         });
 });
 function resetGame(){
-    if(human>comp)
-        winner="HUMAN WINS !";
-    else if(human<comp)
-        winner="COMPUTER WINS !";
-    else
-        winner="DRAW :(";
+    if(human>comp){
+        winner="HUMAN WINS ! SCORE="+human+":"+comp;
+    }
+    else if(human<comp){
+        winner="COMPUTER WINS ! SCORE="+human+":"+comp;
+    }
     div.textContent=winner;
     container.appendChild(div);
     human=0;
     comp=0;
+    hscore.textContent="Human:"+human;
+    cscore.textContent="Comp:"+comp;
     winner="";
 }
 function getComputerChoice(){
