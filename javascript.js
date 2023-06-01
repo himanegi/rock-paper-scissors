@@ -3,14 +3,43 @@ let computerSelection;
 let buttons=document.querySelectorAll('button');
 const container= document.querySelector('#container');
 const div=document.createElement('div');
+let human=0;
+let comp=0;
+let cnt=0;
+let winner="";
 buttons.forEach(btn=>{
-    btn.addEventListener('click',()=>{
-        computerSelection=getComputerChoice();
-        playerSelection=btn.name;
-        div.textContent=playRound(playerSelection, computerSelection);
-        container.appendChild(div);
-    });
+        btn.addEventListener('click',()=>{
+            computerSelection=getComputerChoice();
+            playerSelection=btn.name;
+            const result=playRound(playerSelection, computerSelection);
+            div.textContent=result;
+            if(result.slice(4,5)=="W")
+                human++;
+            else if(result.slice(4,5)=="L") 
+                comp++;
+            else if(result=="Draw!"){
+                human++;
+                comp++;
+            }
+            cnt++;
+            if(cnt==6) resetGame();
+            container.appendChild(div);
+        });
 });
+function resetGame(){
+    if(human>comp)
+        winner="HUMAN WINS !";
+    else if(human<comp)
+        winner="COMPUTER WINS !";
+    else
+        winner="DRAW :(";
+    div.textContent=winner;
+    container.appendChild(div);
+    human=0;
+    comp=0;
+    cnt=0;
+    winner="";
+}
 function getComputerChoice(){
     const val=Math.floor(Math.random()*3)+1;
     if(val==1)
